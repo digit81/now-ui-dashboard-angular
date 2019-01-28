@@ -12,7 +12,7 @@ import Chart from 'chart.js';
 export class NavbarComponent implements OnInit {
   private listTitles: any[];
   location: Location;
-  mobile_menu_visible: any = 0;
+  mobile_menu_visible = 0;
   private toggleButton: any;
   private sidebarVisible: boolean;
 
@@ -87,7 +87,7 @@ export class NavbarComponent implements OnInit {
     // const html = document.getElementsByTagName('html')[0];
     const $toggle = document.getElementsByClassName('navbar-toggler')[0];
 
-    if (this.sidebarVisible === false) {
+    if (this.sidebarVisible !== true) {
       this.sidebarOpen();
     } else {
       this.sidebarClose();
@@ -97,6 +97,7 @@ export class NavbarComponent implements OnInit {
     if (this.mobile_menu_visible === 1) {
       // $('html').removeClass('nav-open');
       html.classList.remove('nav-open');
+      const $layer: any = document.getElementsByClassName('close-layer')[0];
       if ($layer) {
         $layer.remove();
       }
@@ -128,6 +129,7 @@ export class NavbarComponent implements OnInit {
         html.classList.remove('nav-open');
         this.mobile_menu_visible = 0;
         $layer.classList.remove('visible');
+        this.sidebarClose();
         setTimeout(function () {
           $layer.remove();
           $toggle.classList.remove('toggled');
